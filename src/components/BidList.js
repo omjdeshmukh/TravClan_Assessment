@@ -1,44 +1,43 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Customer from "./Customer";
 import axios from "axios";
 
-const titleStyle = {
-  color: "#fff",
+const title = {
   width: 100,
   display: "flex",
   alignItems: "center",
 };
-const titleStyle1 = {
-  color: "#fff",
-  width: 20,
-  display: "flex",
-  alignItems: "center",
-};
-const titleStyle2 = {
-  color: "#fff",
-  width: 200,
-  display: "flex",
-  alignItems: "center",
-};
-
-
 
 const BidList = () => {
+  const [data, setData] = useState("");
 
-    useEffect(() => {}, []);
-    
+  useEffect(() => {
+    axios
+      .get("https://intense-tor-76305.herokuapp.com/merchants")
+      .then((res) => {
+        setData(res.data);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <Container>
       <Title>
-        <p style={titleStyle1}> S.No.</p>
-        <p style={titleStyle2}> Profile </p>
-        <p style={titleStyle}> Premium</p>
-        <p style={titleStyle}> Phone</p>
-        <p style={titleStyle}> Email </p>
-        <p style={titleStyle}> Bid </p>
+        <p style={{ ...title, width: 50 }}> S.No.</p>
+        <p style={{ ...title, width: 200 }}> Profile </p>
+        <p style={{ ...title, width: 100 }}> Premium</p>
+        <p style={{ ...title, width: 150 }}> Phone</p>
+        <p style={{ ...title, width: 200 }}> Email </p>
+        <p style={{ ...title, width: 100 }}> Bid </p>
       </Title>
-      <Customer />
+      {data &&
+        data.map((item, id) => {
+          return <Customer item={item} key={id} id={id} />;
+        })}
     </Container>
   );
 };
@@ -58,15 +57,5 @@ const Title = styled.div`
   border-radius: 10px 10px 0 0;
   display: flex;
   justify-content: space-between;
-  padding-left: 10px;
+  padding-left: 20px;
 `;
-
-/*
- "id": "1",
-    "firstname": "Smauel",
-    "lastname": "Matthew",
-    "avatarUrl": "https://prod_membership_avatars.s3.amazonaws.com/avatar-file-d84b533b09f34ab6908345833dc21773.jpg",
-    "email": "test@tes.com",
-    "phone": "9876543210",
-    "hasPremium": true,
-*/

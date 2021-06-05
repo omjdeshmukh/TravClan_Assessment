@@ -1,32 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-const width2 = {
+const title = {
   width: 100,
-  display: "flex",
-  alignItems: "center",
-};
-const width1 = {
-  width: 20,
   display: "flex",
   alignItems: "center",
 };
 
 const Customer = (props) => {
+  const data = props.item;
+
   return (
-    <Container>
-      <p style={width1}> 1 </p>
+    <Container style={{ backgroundColor: "#667292" }}>
+      <p style={{ ...title, width: 50 }}> {props.id + 1} </p>
       <Profile>
-        <Avatar />
+        <img
+          style={{ width: 50, borderRadius: 25, marginRight: 20 }}
+          src={data.avatarUrl}
+          alt="Avatar"
+        />
         <div>
-          <p>fffnnn</p>
-          <p>lllnnn</p>
+          <p>{data.firstname}</p>
+          <p>{data.lastname}</p>
         </div>
       </Profile>
-      <p style={width2}>Preamium</p>
-      <p style={width2}>Phone</p>
-      <p style={width2}>Email</p>
-      <p style={width2}>Bid</p>
+      <p style={{ ...title, width: 100 }}>
+        {data.hasPremium ? "True" : "False"}
+      </p>
+      <p style={{ ...title, width: 150 }}>{data.phone}</p>
+      <p style={{ ...title, width: 200 }}>{data.email}</p>
+      <p style={{ ...title, width: 100 }}>Bid</p>
     </Container>
   );
 };
@@ -35,23 +38,15 @@ export default Customer;
 
 const Container = styled.div`
   height: 70px;
-  background-color: #8d9db6;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-left: 10px;
+  padding-left: 20px;
 `;
 
 const Profile = styled.div`
   width: 200px;
   display: flex;
-  flex-direction: row;
-`;
-
-const Avatar = styled.div`
-  height: 50px;
-  width: 50px;
-  border-radius: 25px;
-  background-color: #fff;
+  align-items: center;
 `;
