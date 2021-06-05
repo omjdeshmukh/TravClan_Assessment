@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Customer from "./Customer";
 import axios from "axios";
+import Paginaion from "./Pagination";
 
 const title = {
   width: 100,
@@ -11,6 +12,9 @@ const title = {
 
 const BidList = () => {
   const [data, setData] = useState("");
+  const [posts, setPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
 
   useEffect(() => {
     axios
@@ -24,21 +28,45 @@ const BidList = () => {
       });
   }, []);
 
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = data && data.slice(indexOfFirstPost, indexOfLastPost);
+
+  console.log(currentPosts);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
-    <Container>
-      <Title>
-        <p style={{ ...title, width: 50 }}> S.No.</p>
-        <p style={{ ...title, width: 200 }}> Profile </p>
-        <p style={{ ...title, width: 100 }}> Premium</p>
-        <p style={{ ...title, width: 150 }}> Phone</p>
-        <p style={{ ...title, width: 200 }}> Email </p>
-        <p style={{ ...title, width: 100 }}> Bid </p>
-      </Title>
-      {data &&
-        data.map((item, id) => {
-          return <Customer item={item} key={id} id={id} />;
-        })}
-    </Container>
+    <>
+      <Container>
+        <Title>
+          <p style={{ ...title, width: 50 }}> S.No.</p>
+          <p style={{ ...title, width: 200 }}> Profile </p>
+          <p style={{ ...title, width: 100 }}> Premium</p>
+          <p style={{ ...title, width: 150 }}> Phone</p>
+          <p style={{ ...title, width: 200 }}> Email </p>
+          <p style={{ ...title, width: 100 }}> Bid </p>
+        </Title>
+        {currentPosts &&
+          currentPosts.map((item, id) => {
+            return (
+              <Customer
+                item={item}
+                key={id}
+                id={id}
+                color={Boolean(id % 2)}
+                index={id + 1}
+              />
+            );
+          })}
+      </Container>
+      <Paginaion
+        posts={currentPage}
+        totalsuggestions={data}
+        postperpages={postsPerPage}
+        paginate={paginate}
+      />
+    </>
   );
 };
 

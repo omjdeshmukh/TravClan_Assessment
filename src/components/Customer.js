@@ -9,9 +9,9 @@ const title = {
 
 const Customer = (props) => {
   const data = props.item;
-
+  console.log(props.color);
   return (
-    <Container style={{ backgroundColor: "#667292" }}>
+    <Container style={{ backgroundColor: props.color ? "#667292" : "#8d9db6" }}>
       <p style={{ ...title, width: 50 }}> {props.id + 1} </p>
       <Profile>
         <img
@@ -19,10 +19,9 @@ const Customer = (props) => {
           src={data.avatarUrl}
           alt="Avatar"
         />
-        <div>
-          <p>{data.firstname}</p>
-          <p>{data.lastname}</p>
-        </div>
+        <p>
+          {data.firstname} {data.lastname}
+        </p>
       </Profile>
       <p style={{ ...title, width: 100 }}>
         {data.hasPremium ? "True" : "False"}
