@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Customer from "./Customer";
 import axios from "axios";
 import Paginaion from "./Pagination";
-import Dashboard from "./Dashboard";
+import Dashboard from "./Dashboard"; 
 
 const title = {
   width: 100,
@@ -21,7 +21,7 @@ const BidList = () => {
       .get("https://intense-tor-76305.herokuapp.com/merchants")
       .then((res) => {
         setData(res.data);
-        // console.log(res);
+        // console.log(res.data.map(item=> console.log(item.bids)));
       })
       .catch((err) => {
         console.log(err);

@@ -39,7 +39,8 @@ const Filter = (props) => {
             marginLeft: 20,
           }}
           onClick={() => setToogle(false)}
-        ></div>
+        >
+        </div>
         <div
           style={{
             backgroundColor: !toogle ? "#fff" : "green",

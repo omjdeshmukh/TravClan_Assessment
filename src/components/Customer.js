@@ -8,20 +8,16 @@ const title = {
   alignItems: "center",
 };
 
-const Amount = (props) => {
-  console.log(props);
-  return <p>x</p>;
-};
-
 const Customer = (props) => {
   const data = props.item;
-  // console.log(data.bids);
-  const [bid, setBid] = useState(null);
   const Bid = data.bids;
-  // console.log(Bid);
 
-  Bid.map((item, id) => {
-    return <Amount item={item.amount} key={id} />;
+  // console.log(Math.max([data.bids])); //console.log(Math.max(-1, -3, -2));
+
+  const [bid, setBid] = useState(null);
+
+  Bid.map((item) => {
+    return console.log(Math.max(item.amount));
   });
 
   return (
