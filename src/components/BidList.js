@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Customer from "./Customer";
 import axios from "axios";
 import Paginaion from "./Pagination";
-import Dashboard from "./Dashboard"; 
+import Dashboard from "./Dashboard";
 
 const title = {
   width: 100,
@@ -15,6 +15,7 @@ const BidList = () => {
   const [data, setData] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
+  const [bid, setBid] = useState("");
 
   useEffect(() => {
     axios
@@ -33,6 +34,20 @@ const BidList = () => {
   const currentPosts = data && data.slice(indexOfFirstPost, indexOfLastPost);
 
   // console.log(currentPosts);
+  let arr = [];
+  let arrm = [];
+
+  data &&
+    data.map((item) => {
+      const bids = item && item.bids.map((bid) => bid.amount);
+      const maxValue = Math.max(...bids);
+      const minValue = Math.min(...bids);
+      console.log(maxValue);
+      arr.push(maxValue);
+      arrm.push(minValue);
+    });
+
+  console.log(arr);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -49,6 +64,7 @@ const BidList = () => {
         </Title>
         {currentPosts &&
           currentPosts.map((item, id) => {
+            console.log(id);
             return (
               <>
                 <Customer
@@ -57,6 +73,8 @@ const BidList = () => {
                   id={id}
                   color={Boolean(id % 2)}
                   index={id + 1}
+                  amount={arr[id]}
+                  amountm={arrm[id]}
                 />
               </>
             );

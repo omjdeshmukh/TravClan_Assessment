@@ -10,15 +10,8 @@ const title = {
 
 const Customer = (props) => {
   const data = props.item;
-  const Bid = data.bids;
-
-  // console.log(Math.max([data.bids])); //console.log(Math.max(-1, -3, -2));
-
-  const [bid, setBid] = useState(null);
-
-  Bid.map((item) => {
-    return console.log(Math.max(item.amount));
-  });
+  const [toggle, setToggle] = useState(true);
+  console.log(props.amount);
 
   return (
     <>
@@ -48,7 +41,9 @@ const Customer = (props) => {
         </p>
         <p style={{ ...title, width: 150 }}>{data.phone}</p>
         <p style={{ ...title, width: 200 }}>{data.email}</p>
-        <p style={{ ...title, width: 100 }}> $ {bid || 0}</p>
+        <p style={{ ...title, width: 100 }}>
+          $ {toggle ? props.amountm : props.amount || 0}
+        </p>
       </Container>
     </>
   );
