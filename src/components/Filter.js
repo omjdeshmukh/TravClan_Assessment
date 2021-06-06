@@ -1,11 +1,54 @@
 import React from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
-const Filter = () => {
+const Filter = (props) => {
+  const [toogle, setToogle] = useState(false);
+
   return (
     <Container>
-      <h1 style={{ color: "#fff" }}>Filter</h1>
-      <h1 style={{ color: "#fff" }}>Filter</h1>
+      <h4 style={{ color: "#fff" }}>Filter</h4>
+      <div style={{ display: "flex" }}>
+        <div style={{ display: "flex" }}>
+          <h5
+            style={{
+              visibility: !toogle ? "hidden" : "visible",
+              color: "#fff",
+              position: "absolute",
+              right: 200,
+            }}
+          >
+            Min Bids
+          </h5>
+          <h5
+            style={{
+              visibility: toogle ? "hidden" : "visible",
+              color: "#fff",
+              position: "absolute",
+              right: 200,
+            }}
+          >
+            Max Bids
+          </h5>
+        </div>
+        <div
+          style={{
+            backgroundColor: toogle ? "#fff" : "green",
+            height: 30,
+            width: 40,
+            marginLeft: 20,
+          }}
+          onClick={() => setToogle(false)}
+        ></div>
+        <div
+          style={{
+            backgroundColor: !toogle ? "#fff" : "green",
+            height: 30,
+            width: 40,
+          }}
+          onClick={() => setToogle(true)}
+        ></div>
+      </div>
     </Container>
   );
 };
@@ -16,8 +59,7 @@ const Container = styled.div`
   height: 50px;
   width: 90%;
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
 `;

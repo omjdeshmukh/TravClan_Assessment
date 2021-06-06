@@ -1,16 +1,24 @@
 import React from "react";
 import "./App.css";
-import { Link, BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
-import Filter from "./components/Filter";
-import BidList from "./components/BidList";
+import Dashboard from "./components/Dashboard";
+import Home from "./Screens/Home";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Filter />
-      <BidList />
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route
+            exact
+            path="/dashboard/:username/:userId"
+            component={Dashboard}
+          />
+        </Switch>
+      </Router>
     </div>
   );
 }
