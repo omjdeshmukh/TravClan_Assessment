@@ -15,7 +15,7 @@ const Filter = (props) => {
               visibility: !toogle ? "hidden" : "visible",
               color: "#fff",
               position: "absolute",
-              right: 200,
+              right: "20%",
             }}
           >
             Min Bids
@@ -25,7 +25,7 @@ const Filter = (props) => {
               visibility: toogle ? "hidden" : "visible",
               color: "#fff",
               position: "absolute",
-              right: 200,
+              right: "20%",
             }}
           >
             Max Bids
@@ -39,8 +39,7 @@ const Filter = (props) => {
             marginLeft: 20,
           }}
           onClick={() => setToogle(false)}
-        >
-        </div>
+        ></div>
         <div
           style={{
             backgroundColor: !toogle ? "#fff" : "green",
